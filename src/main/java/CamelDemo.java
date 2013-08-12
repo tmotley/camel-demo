@@ -14,8 +14,8 @@ public class CamelDemo {
         camelContext.addRoutes(new RouteBuilder() {
             @Override
             public void configure() throws Exception {
-                from("file://Users/tom/Dropbox/photos/cambodia_laos").
-                        to("file://Users/tom/backup");
+                from("file://src/test/resources/inbox").
+                        to("file://src/test/resources/outbox");
             }
         });
 
