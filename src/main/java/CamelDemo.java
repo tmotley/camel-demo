@@ -14,14 +14,12 @@ public class CamelDemo {
         camelContext.addRoutes(new RouteBuilder() {
             @Override
             public void configure() throws Exception {
-                from("file://src/test/resources/inbox").
-                        to("file://src/test/resources/outbox");
+                from("file://src/test/resources/inbox").to("file://src/test/resources/outbox");
             }
         });
 
         camelContext.start();
         Thread.sleep(10000);
         camelContext.stop();
-
     }
 }
