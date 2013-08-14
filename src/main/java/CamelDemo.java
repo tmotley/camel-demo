@@ -1,6 +1,6 @@
-import org.apache.camel.CamelContext;
-import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.impl.DefaultCamelContext;
+import beans.CamelContextRunner;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * User: tom
@@ -9,17 +9,9 @@ import org.apache.camel.impl.DefaultCamelContext;
  */
 public class CamelDemo {
     public static void main(String[] args) throws Exception {
-        CamelContext camelContext = new DefaultCamelContext();
+        ApplicationContext context = new ClassPathXmlApplicationContext(new String[] {"app-context.xml"});
 
-        camelContext.addRoutes(new RouteBuilder() {
-            @Override
-            public void configure() throws Exception {
-                from("file://src/test/resources/inbox").to("file://src/test/resources/outbox");
-            }
-        });
-
-        camelContext.start();
-        Thread.sleep(10000);
-        camelContext.stop();
+        CamelContextRunner runner = (CamelContextRunner) context.getBean("camelContextRunner");
+        runner.run();
     }
 }
