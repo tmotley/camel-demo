@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 /**
  */
 @Component
-public class CamelContextRunner implements CamelContextAware {
+public class CamelRunner implements CamelContextAware, Runnable {
     private CamelContext ctx;
 
     @Override
@@ -20,9 +20,13 @@ public class CamelContextRunner implements CamelContextAware {
         return ctx;
     }
 
-    public void run() throws Exception {
-        getCamelContext().start();
-        Thread.sleep(10000);
-        getCamelContext().stop();
+    public void run()  {
+        try {
+            getCamelContext().start();
+            Thread.sleep(10000);
+            getCamelContext().stop();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

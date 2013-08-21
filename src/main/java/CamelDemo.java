@@ -1,4 +1,4 @@
-import beans.CamelContextRunner;
+import beans.CamelRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -10,8 +10,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class CamelDemo {
     public static void main(String[] args) throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext(new String[] {"app-context.xml"});
-
-        CamelContextRunner runner = (CamelContextRunner) context.getBean("camelContextRunner");
-        runner.run();
+        CamelRunner runner = (CamelRunner) context.getBean("camelRunner");
+        new Thread(runner).start();
     }
 }

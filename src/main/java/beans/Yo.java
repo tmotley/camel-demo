@@ -1,5 +1,6 @@
 package beans;
 
+import org.apache.camel.Handler;
 import org.springframework.stereotype.Component;
 
 /**
@@ -7,7 +8,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Yo {
-    public String invoke() throws Exception {
+    @Handler
+    public String invoke(String payload) throws Exception {
         return "I am the resurrection";
     }
 }
