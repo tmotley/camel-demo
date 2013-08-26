@@ -11,6 +11,6 @@ public class SpringDemo {
     public static void main(String[] args) throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext(new String[] {"app-context.xml"});
         Yo yo = (Yo) context.getBean("yo");
-        System.out.println(yo.invoke("none"));
+        //System.out.println(yo.doSomething("none"));
     }
 }

@@ -11,6 +11,7 @@
     <camelContext xmlns="http://camel.apache.org/schema/spring">
         <packageScan>
             <package>routes</package>
+            <excludes></excludes>
         </packageScan>
     </camelContext>
 </beans>

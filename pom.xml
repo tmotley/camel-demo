@@ -9,24 +9,43 @@
 
     <properties>
         <camel-version>2.11.1</camel-version>
-        <spring-version>3.2.3.RELEASE</spring-version>
+        <!-- Latest Spring 3.2 blows up on AOP version conflict with Camel -->
+        <spring-version>3.1.4.RELEASE</spring-version>
     </properties>
 
     <dependencies>
+        <!-- CAMEL -->
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-core</artifactId>
             <version>${camel-version}</version>
         </dependency>
         <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-spring</artifactId>
+            <version>${camel-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-servlet</artifactId>
+            <version>${camel-version}</version>
+        </dependency>
+       <!-- <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-servletlistener</artifactId>
+            <version>${camel-version}</version>
+        </dependency>-->
+
+        <!-- SPRING -->
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${spring-version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-spring</artifactId>
-            <version>2.11.1</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring-version}</version>
         </dependency>
     </dependencies>
 
@@ -37,6 +56,20 @@
                 <artifactId>camel-maven-plugin</artifactId>
                 <configuration>
                     <applicationContextUri>app-context.xml</applicationContextUri>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <configuration>
+                    <scanIntervalSeconds>5</scanIntervalSeconds>
+                    <stopPort>9090</stopPort>
+                    <stopKey>stop</stopKey>
+                    <webApp>
+                        <contextPath>/test</contextPath>
+                    </webApp>
+
+                    <jvmArgs>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArgs>
                 </configuration>
             </plugin>
         </plugins>

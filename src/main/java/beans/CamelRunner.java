@@ -22,9 +22,11 @@ public class CamelRunner implements CamelContextAware, Runnable {
 
     public void run()  {
         try {
+            System.out.println("CAMEL STARTING");
             getCamelContext().start();
             Thread.sleep(10000);
             getCamelContext().stop();
+            System.out.println("CAMEL STOPPED");
         } catch (Exception e) {
             e.printStackTrace();
         }
